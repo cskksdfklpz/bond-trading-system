@@ -29,32 +29,32 @@ int main(int argc, char *argv[]) {
     BondInfo::init();
 
     /* trades.txt 
-     *     	|
-	 *     	v		  (port=1236)	
-	 * (data_reader ->  TCP/IP -> BondTradeBookingConnector) 
-	 * 		|
-	 *      V
-	 * BondTradeBookingService <--------------------|
-	 * 	   	|										|
-	 * 		V										|
-	 * (BondPositionListener)		(BondTradeBookingListener) <- BondExecutionService
-	 * 		|										
-	 * 		V										
-	 * BondPositionService -> (HistoricalDataListener<Position<Bond>)				
-	 * 		|									|
-	 * 		V									V
-	 * (BondRiskListener)	   HistoricalDataService<Position<Bond>> -> BondPositionConnector -> ./output/positions.txt
-	 * 		|
-	 * 		V
-	 * BondRiskService -> (HistoricalDataListener<PV01<Bond>>) 
-	 * 									|
-	 * 									V
-	 * 						HistoricalDataService<PV01<Bond>>
-	 * 									|		
-	 * 									V
-	 * 						BondRiskConnector -> ./output/risk.txt
-	 * 								
-	 */
+     *         |
+     *         v          (port=1236)    
+     * (data_reader ->  TCP/IP -> BondTradeBookingConnector) 
+     *         |
+     *         V
+     * BondTradeBookingService <--------------------|
+     *         |                                    |
+     *         V                                    |
+     * (BondPositionListener)        (BondTradeBookingListener) <- BondExecutionService
+     *         |                                        
+     *         V                                        
+     * BondPositionService -> (HistoricalDataListener<Position<Bond>)                
+     *         |                                    |
+     *         V                                    V
+     * (BondRiskListener)       HistoricalDataService<Position<Bond>> -> BondPositionConnector -> ./output/positions.txt
+     *         |
+     *         V
+     * BondRiskService -> (HistoricalDataListener<PV01<Bond>>) 
+     *                                     |
+     *                                     V
+     *                         HistoricalDataService<PV01<Bond>>
+     *                                     |        
+     *                                     V
+     *                         BondRiskConnector -> ./output/risk.txt
+     *                                 
+     */
 
     BondPositionConnector bond_position_connector("./output/positions.txt", 1239);
     HistoricalDataService<Position<Bond>> bond_position_HDS(&bond_position_connector, "Position<Bond>");
@@ -85,37 +85,37 @@ int main(int argc, char *argv[]) {
     bond_trade_booking_connector.Subscribe(1236);
 
     /* marketdata.txt 
-	 *     	|
-	 *     	v		  (port=1237)	
-	 * (data_reader ->  TCP/IP -> BondMarketDataConnector) 
-	 * 		|
-	 *      V
-	 * BondMarketDataService 
-	 * 	   	|
-	 * 		V
-	 * (BondAlgoExecutionListener)
-	 * 		|
-	 * 		V
-	 * BondAlgoExecutionService
-	 * 		|
-	 * 		V
-	 * (BondExecutionListener)
-	 * 		|
-	 * 		V
-	 * BondExecutionService -------------------------------------
-	 * 		|													|
-	 * 		V													V
-	 * (HistoricalDataListener<ExecutionOrder<Bond>)		(BondTradeBookingListener)
-	 * 		|													|
-	 * 		V													V
-	 * 	HistoricalDataService<ExecutionOrder<Bond>>			BondTradeBookingService
-	 * 		|
-	 * 		V
-	 * 	(BondExecutionConnector)
-	 * 		|
-	 * 		V
-	 * 	output/executions.txt
-	 */
+     *         |
+     *         v          (port=1237)    
+     * (data_reader ->  TCP/IP -> BondMarketDataConnector) 
+     *         |
+     *         V
+     * BondMarketDataService 
+     *         |
+     *         V
+     * (BondAlgoExecutionListener)
+     *         |
+     *         V
+     * BondAlgoExecutionService
+     *         |
+     *         V
+     * (BondExecutionListener)
+     *         |
+     *         V
+     * BondExecutionService -----------------------------------------
+     *         |                                                    |
+     *         V                                                    V
+     * (HistoricalDataListener<ExecutionOrder<Bond>)        (BondTradeBookingListener)
+     *         |                                                    |
+     *         V                                                    V
+     *     HistoricalDataService<ExecutionOrder<Bond>>       BondTradeBookingService
+     *         |
+     *         V
+     *     (BondExecutionConnector)
+     *         |
+     *         V
+     *     output/executions.txt
+     */
 
     BondExecutionConnector bond_execution_connector("./output/executions.txt", 1238);
     HistoricalDataService<ExecutionOrder<Bond>> bond_execution_HDS(&bond_execution_connector, "ExecutionOrder<Bond>");
@@ -144,34 +144,34 @@ int main(int argc, char *argv[]) {
     bond_marketdata_connector.Subscribe(1237);
 
     /* prices.txt 
-	 *     |
-	 *     v		  (port=1234)	
-	 * (data_reader ->  TCP/IP -> BondPricingConnector) 
-	 *     |
-	 *     V
-	 * BondPricingService -----------------------------------
-	 *     |												|
-	 * 	   V												V
-	 * (GUIServiceListener) 						(BondAlgoStreamingListener)
-	 *     |												|
-	 *     V												V
-	 * GUIService									BondAlgoStreamingService
-	 * 	   |												|
-	 * 	   V		   (port=1235)						    V
-	 * (GUIConnector -> TCP/IP -> data_wrtier)		(BondStreamingListener)
-	 * 	   |												|
-	 * 	   V												V
-	 * output/gui.txt								BondStreamingService
-	 * 														|
-	 * 														V
-	 * 												(HistoricalDataListener<PriceStream<Bond>)
-	 * 														|
-	 * 														V
-	 * 												HistoricalDataService<PriceStream<Bond>
-	 * 														|
-	 * 														V
-	 * 												BondStreamingConnector -> output/streaming.txt
-	 */
+     *     |
+     *     v          (port=1234)    
+     * (data_reader ->  TCP/IP -> BondPricingConnector) 
+     *     |
+     *     V
+     * BondPricingService -----------------------------------
+     *     |                                                |
+     *     V                                                V
+     * (GUIServiceListener)                         (BondAlgoStreamingListener)
+     *     |                                                |
+     *     V                                                V
+     * GUIService                                   BondAlgoStreamingService
+     *      |                                               |
+     *      V           (port=1235)                         V
+     * (GUIConnector -> TCP/IP -> data_wrtier)      (BondStreamingListener)
+     *        |                                             |
+     *        V                                             V
+     * output/gui.txt                                BondStreamingService
+     *                                                      |
+     *                                                      V
+     *                                               (HistoricalDataListener<PriceStream<Bond>)
+     *                                                       |
+     *                                                       V
+     *                                               HistoricalDataService<PriceStream<Bond>
+     *                                                       |
+     *                                                       V
+     *                                               BondStreamingConnector -> output/streaming.txt
+     */
     // GUI connector/service/listerner
     GUIConnector<Bond> gui_connector("./output/gui.txt");
     GUIService<Bond> gui_service(&gui_connector, 300);
@@ -201,25 +201,25 @@ int main(int argc, char *argv[]) {
     pricing_connector.Subscribe(1234);
 
     /* inquiries.txt 
-	 *     	|
-	 *     	v		  (port=1242)	
-	 * (data_reader ->  TCP/IP -> BondInquiryConnector) 
-	 * 		|
-	 *      V
-	 * BondInquiryService <--------------------> QuoteConnector
-	 * 	   	|										
-	 * 		V										
-	 * (HistoricalDataListener<Inquiry<Bond>>)		
-	 * 		|										
-	 * 		V										
-	 * HistoricalDataService<Inquiry<Bond>> 
-	 * 		|									
-	 * 		V									
-	 * BondAllInquiriesConnector 
-	 * 		|
-	 * 		V
-	 * ./output/allinquiries.txt 						
-	 */
+     *         |
+     *         v          (port=1242)    
+     * (data_reader ->  TCP/IP -> BondInquiryConnector) 
+     *         |
+     *         V
+     * BondInquiryService <--------------------> QuoteConnector
+     *         |                                        
+     *         V                                        
+     * (HistoricalDataListener<Inquiry<Bond>>)        
+     *         |                                        
+     *         V                                        
+     * HistoricalDataService<Inquiry<Bond>> 
+     *         |                                    
+     *         V                                    
+     * BondAllInquiriesConnector 
+     *         |
+     *         V
+     * ./output/allinquiries.txt                         
+     */
 
     BondAllInquiriesConnector bond_allinquiries_connector("./output/allinquiries.txt", 1243);
     HistoricalDataService<Inquiry<Bond>> bond_allinquiries_HDS(&bond_allinquiries_connector, "Inquiry<Bond>");
