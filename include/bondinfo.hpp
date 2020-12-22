@@ -48,24 +48,6 @@ class BondInfo {
 
     // method to convert CUSIP from string to boost::gregorian::date
     static boost::gregorian::date* CUSIPToDate(string cusip) {
-        // if (cusip == "91282CAX9")  // 2Y
-        //     return new boost::gregorian::date(2022, Nov, 30);
-        // else if (cusip == "91282CBA80")  // 3Y
-        //     return new boost::gregorian::date(2023, Dec, 15);
-        // else if (cusip == "91282CAZ4")  // 5Y
-        //     return new boost::gregorian::date(2025, Nov, 30);
-        // else if (cusip == "91282CAY7")  // 7Y
-        //     return new boost::gregorian::date(2027, Nov, 30);
-        // else if (cusip == "91282CAV3")  // 10Y
-        //     return new boost::gregorian::date(2030, Nov, 15);
-        // else if (cusip == "912810ST6")  // 20Y
-        //     return new boost::gregorian::date(2040, Nov, 15);
-        // else if (cusip == "912810SS8")  // 30Y
-        //     return new boost::gregorian::date(2050, Nov, 15);
-        // else {  // wrong CUSIP
-        //     std::cout << "BondInfo::CUSIPToDate: wrong CUSIP" << std::endl;
-        //     return nullptr;
-        // }
         return date_map.find(cusip)->second;
     }
 
@@ -115,9 +97,6 @@ class BondInfo {
 
     // return a bond product object via CUSIP
     static Bond* GetBond(std::string cusip) {
-        // double coupon = CUSIPToCoupon(cusip);
-        // auto maturityPtr = CUSIPToDate(cusip);
-        // return new Bond(cusip, CUSIP, "T", coupon, *maturityPtr);
         return bond_map.find(cusip)->second;
     }
 
