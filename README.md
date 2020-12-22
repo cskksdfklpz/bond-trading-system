@@ -158,3 +158,7 @@ Finished, killing the data_writer (./output/positions.txt) process
 ```
 
 If you can't run the code, you need to change the port number in the source code `src/main.cpp` and `Makefile` (that means some applications are using port from `1234` to `1243`, change it to free port!).
+
+Here is a demo to show that this project has been finished and runable (at least on my machine).
+
+![](./pic/ezgif-3-bf711b7d65dc.gif)
