@@ -186,6 +186,7 @@ def generate_inquiry(n):
             idx += 1
     f.close()
             
+# change the number of data generated here
 generate_price(10000)
 generate_trade(10)
 generate_market_data(10000)
