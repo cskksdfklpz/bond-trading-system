@@ -165,3 +165,4 @@ Here is a demo to show that this project has been finished and runable (at least
 
 ## Structure of the Bond Trading system
 
+![Structure](./pic/bond-trading-system.png)
