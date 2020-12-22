@@ -7,7 +7,7 @@ by Quanzhi Bi
 To run the bond trading system, first clone the repo to your local machine.
 
 ```bash
-git clone ...
+git clone https://gitlab.com/quanzhibi/bond-trading-system.git
 cd bond-trading-system 
 ```
 
@@ -38,7 +38,22 @@ with the following output
 ./output/streaming.txt
 ```
 
-Then we compile the system. You have two options `debug mode` (print a lot of debug info to the terminal, slow) and `release mode` (barely no output to the terminal, fast). To compile in debug mode, type the following command in the terminal.
+Then we compile the system. You need to change the following boost header/lib path of your own in Makefile.
+
+```Makefile
+INCLUDE  := -Iinclude/
+LDFLAGS  := -L /usr/local/Cellar/boost/1.72.0_2/lib 
+```
+
+If you need, you can also change the compiler (to whatever you want, `g++`, `clang`, `MSVC`):
+
+```Makefile
+CXX      := -c++
+```
+
+You have two options, namely `debug mode` (print a lot of debug info to the terminal, slow) and `release mode` (used -O3, barely no output to the terminal, fast). 
+
+To compile in debug mode, type the following command in the terminal.
 
 ```bash
 make debug
@@ -49,6 +64,17 @@ To compile in release mode, type the following command in the terminal.
 ```bash
 make release
 ```
+
+After that, change the parameter (number of data generated) in the python script `data_generator.py`:
+
+```python
+generate_price(10000)
+generate_trade(10)
+generate_market_data(10000)
+generate_inquiry(10)
+```
+
+Change the number to be 1 million if you want (for simplicity I used a smaller configuration).
 
 Finally to run the bond-trading-system, just type
 
@@ -130,3 +156,5 @@ Finished, killing the data_writer (./output/executions.txt) process
 Finished, killing the data_writer (./output/risk.txt) process
 Finished, killing the data_writer (./output/positions.txt) process
 ```
+
+If you can't run the code, you need to change the port number in the source code `src/main.cpp` and `Makefile` (that means some applications are using port from `1234` to `1243`, change it to free port!).
