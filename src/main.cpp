@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
     BondInfo::init();
 
     /* trades.txt 
-	 *     	|
+     *     	|
 	 *     	v		  (port=1236)	
 	 * (data_reader ->  TCP/IP -> BondTradeBookingConnector) 
 	 * 		|
