@@ -163,6 +163,55 @@ Here is a demo to show that this project has been finished and runable (at least
 
 ![](./pic/ezgif-3-bf711b7d65dc.gif)
 
+## File Structure of the Program
+
+```
+.
+├── Makefile
+├── README.md
+├── build                               # binary files
+│   ├── apps                            # executable program
+│   │   ├── bond_trading_system
+│   │   ├── data_reader
+│   │   └── data_writer
+│   └── objects                         # .o files as the intermidiate product
+│       └── src
+│           └── main.o
+├── data                                # input data directory
+│   ├── inquiries.txt
+│   ├── marketdata.txt
+│   ├── prices.txt
+│   └── trades.txt
+├── data_generator.py
+├── include                             # headers (*.hpp)
+│   ├── bondinfo.hpp
+│   ├── datapublisher.hpp
+│   ├── executionservice.hpp
+│   ├── guiservice.hpp
+│   ├── historicaldataservice.hpp
+│   ├── inquiryservice.hpp
+│   ├── marketdataservice.hpp
+│   ├── positionservice.hpp
+│   ├── pricingservice.hpp
+│   ├── products.hpp
+│   ├── riskservice.hpp
+│   ├── soa.hpp
+│   ├── streamingservice.hpp
+│   └── tradebookingservice.hpp
+├── output                              # output data directory
+│   ├── allinquiries.txt
+│   ├── executions.txt
+│   ├── gui.txt
+│   ├── positions.txt
+│   ├── risk.txt
+│   └── streaming.txt
+├── src                                 # source code (*.cpp)
+|   ├── data_reader.cpp
+|   ├── data_writer.cpp
+|   └── main.cpp
+|── pic                                 # pictures used in the README.md
+```
+
 ## Structure of the Bond Trading system
 
 ![Structure](./pic/bond-trading-system.png)
