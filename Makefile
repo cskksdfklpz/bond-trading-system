@@ -7,7 +7,7 @@ APP_DIR  := $(BUILD)/apps
 DAT_DIR  := ./data
 OUT_DIR  := ./output
 TARGET   := bond_trading_system
-INCLUDE  := -Iinclude/
+INCLUDE  := -Iinclude/ -I/opt/homebrew/Cellar/boost/1.75.0/include
 SRC      := $(wildcard src/main.cpp)
 
 OBJECTS  := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
