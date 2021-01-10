@@ -1,6 +1,6 @@
 CXX      := -c++
 CXXFLAGS := -std=c++14 -stdlib=libc++
-LDFLAGS  := -L /usr/local/Cellar/boost/1.72.0_2/lib 
+LDFLAGS  := -L /opt/homebrew/Cellar/boost/1.75.0/lib 
 BUILD    := ./build
 OBJ_DIR  := $(BUILD)/objects
 APP_DIR  := $(BUILD)/apps
