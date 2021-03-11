@@ -7,7 +7,7 @@ by Quanzhi Bi
 To run the bond trading system, first clone the repo to your local machine.
 
 ```bash
-git clone https://gitlab.com/quanzhibi/bond-trading-system.git
+git clone https://github.com/cskksdfklpz/bond-trading-system.git
 cd bond-trading-system 
 ```
 
